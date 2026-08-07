@@ -1,0 +1,28 @@
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val   int
+ *     Left  *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
+func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+	if root == nil {
+		return root
+	}
+	return dfs(root, p, q)
+}
+
+func dfs(root, p, q *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+	if p.Val > root.Val && q.Val > root.Val {
+		return dfs(root.Right, p, q)
+	}
+	if p.Val < root.Val && q.Val < root.Val {
+		return dfs(root.Left, p, q)
+	}
+	return root
+}
